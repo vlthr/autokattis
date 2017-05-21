@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import glob
 import subprocess
 import difflib
@@ -40,8 +41,10 @@ def download_samples(problem, directory=SAMPLES_DIR):
 def current_dir_name():
     return os.path.basename(os.getcwd())
 
+
 def c(msg, color):
     return color+msg+Style.RESET_ALL
+
 
 def test(program, input_file, expected_file):
     inp = open(input_file).read()
