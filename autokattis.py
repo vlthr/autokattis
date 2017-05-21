@@ -4,11 +4,11 @@ import sys
 import itertools
 
 
-def pairwise(iterable):
-    "s -> (s0,s1), (s1,s2), (s2, s3), ..."
-    a, b = itertools.tee(iterable)
-    next(b, None)
-    return zip(a, b)
+def grouper(iterable, n, fillvalue=None):
+    "Collect data into fixed-length chunks or blocks"
+    # grouper('ABCDEFG', 3, 'x') --> ABC DEF Gxx"
+    args = [iter(iterable)] * n
+    return itertools.zip_longest(*args, fillvalue=fillvalue)
 
 
 def main():
@@ -20,7 +20,7 @@ def main():
     html = r.text
     soup = BeautifulSoup(html, "lxml")
     samples = soup.select('.sample pre')
-    for inp, outp in pairwise(samples):
+    for inp, outp in grouper(samples, 2):
         print(inp.text.strip())
         print(outp.text.strip())
 
